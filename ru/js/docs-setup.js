@@ -170,7 +170,7 @@ NG_DOCS={
       "id": "pascalprecht.translate.TRANSLATE_MF_INTERPOLATION_CACHE",
       "shortName": "pascalprecht.translate.TRANSLATE_MF_INTERPOLATION_CACHE",
       "type": "property",
-      "moduleName": "pascalprecht",
+      "moduleName": "pascalprecht.translate",
       "shortDescription": "Uses MessageFormat.js to interpolate strings against some values.",
       "keywords": "api interpolate js messageformat pascalprecht property strings translate translate_mf_interpolation_cache values"
     },
@@ -387,6 +387,7 @@ NG_DOCS={
     "guide": false
   },
   "html5Mode": false,
+  "editExample": true,
   "startPage": "/guide",
   "scripts": [
     "messageformat.js",

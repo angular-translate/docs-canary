@@ -15,8 +15,8 @@
 <h3 id="асинхронная-загрузка_использование-urlloader">Использование urlLoader</h3>
 <p>Это, возможно, простейший способ загрузки данных перевода асинхронно. Все, что для этого нужно - это
 установить расширение <code>angular-translate-loader-url</code> при помощи Bower:</p>
-<pre><code>$ bower install angular-translate-loader-url</code></pre>
-<p>Когда оно установится, убедитесь, что включили его в свой HTML документ. Хорошо, загрузчик доступен
+<pre><code>$ bower install angular-translate-loader-url
+</code></pre><p>Когда оно установится, убедитесь, что включили его в свой HTML документ. Хорошо, загрузчик доступен
 и мы должны сказать angular-translate использовать его. <code>$translateProvider</code> предоставляет метод под
 названием <code>useUrlLoader()</code>. Очень просто, да? <code>useUrlLoader()</code> принимает аргумент, который описывает
 конечную точку на сервере, которая вернет в ответ данные перевода.</p>
@@ -40,8 +40,8 @@ $translateProvider.preferredLanguage('en');
 вероятно, нужно использовать расширение <code>angular-translate-loader-static-files</code>, которое описывает
 шаблон ваших файлов локализации.</p>
 <p>Как и urlLoader, вы можете установить расширение staticFilesLoader при помощи Bower:</p>
-<pre><code>$ bower install angular-translate-loader-static-files</code></pre>
-<p>Когда пакет установлен и подключен, вы можете вызвать <code>useStaticFilesLoader()</code> метод
+<pre><code>$ bower install angular-translate-loader-static-files
+</code></pre><p>Когда пакет установлен и подключен, вы можете вызвать <code>useStaticFilesLoader()</code> метод
 <code>$translateProvider</code>&#39;а, чтобы сказать angular-translate, что нужно использовать его. Загрузчик
 статичных файлов работает немного иначе. Вместо того, чтобы иметь фиксированный URL, который
 нуждается только в параметре <code>lang</code>, вы теперь можете иметь различные файлы локализации, которые
@@ -99,8 +99,8 @@ angular-translate загрузит его автоматически как мо
 <p>Да, это то, о чем необходимо позаботиться, если нам нужна загрузка по частям. Тем не менее,
 <code>angular-translate</code> предусмотрел это. Тут в игру вступает <code>partialLoader</code>.</p>
 <p>Вы можете установить его как и любой другой загрузчик просто используя Bower:</p>
-<pre><code>$ bower install angular-translate-loader-partial</code></pre>
-<p>Используя <code>partialLoader</code> вам нужно подумать о шаблоне, который <code>angular-translate</code> будет
+<pre><code>$ bower install angular-translate-loader-partial
+</code></pre><p>Используя <code>partialLoader</code> вам нужно подумать о шаблоне, который <code>angular-translate</code> будет
 использовать для загрузки переводов. Это похоже на <code>staticFilesLoader</code>, но немного более специфично.
 Вам необходимо указать свойства <code>part</code> и <code>lang</code>, где <code>part</code> означает часть вашего приложения
 (к примеру, <code>home</code>), и <code>lang</code> - ключ нужного языка.</p>
@@ -108,8 +108,8 @@ angular-translate загрузит его автоматически как мо
 <pre><code>/i18n/home/en.json
 /i18n/home/de.json
 /i18n/contact/en.json
-/i18n/contact/de.json</code></pre>
-<p>Вполне логично, да? Теперь, когда мы знаем как структурированы наши данные, мы можем настроить
+/i18n/contact/de.json
+</code></pre><p>Вполне логично, да? Теперь, когда мы знаем как структурированы наши данные, мы можем настроить
 <code>$translateProvider</code> для использования загрузчика с этим шаблоном:</p>
 <pre class="prettyprint linenums">
 $translateProvider.useLoader('$translatePartialLoader', {
@@ -207,7 +207,8 @@ app.run(function ($rootScope, $translate) {
     $log.error(&#39;The &quot;&#39; + part + &#39;/&#39; + lang + &#39;&quot; part was not loaded.&#39;);
     return $q.when({});
   };
-});</code></pre>
+});
+</code></pre>
 <p>Итак, теперь все, что мы должны сделать, это сказать загрузчику название сервиса, который он должен
 использовать в качестве обработчика ошибок:</p>
 <pre class="prettyprint linenums">
