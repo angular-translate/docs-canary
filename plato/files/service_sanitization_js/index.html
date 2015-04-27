@@ -48,7 +48,7 @@
     </div>
     <div class="col-md-6">
       <h2 class="header">Lines of code <i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="Source Lines of Code / Logical Lines of Code" data-original-title="SLOC/LSLOC" data-container="body"></i></h2>
-      <p class="stat">241</p>
+      <p class="stat">235</p>
     </div>
   </div>
   <div class="row historical">
@@ -123,47 +123,41 @@ function $translateSanitizationProvider () {
    * @propertyOf pascalprecht.translate.$translateSanitizationProvider
    *
    * @description
-   * blabla
+   * Following strategies are built-in:
+   * &lt;dl&gt;
+   *   &lt;dt&gt;sanitize&lt;/dt&gt;
+   *   &lt;dd&gt;Sanitizes HTML in the translation text using $sanitize&lt;/dd&gt;
+   *   &lt;dt&gt;escape&lt;/dt&gt;
+   *   &lt;dd&gt;Escapes HTML in the translation&lt;/dd&gt;
+   *   &lt;dt&gt;sanitizeParameters&lt;/dt&gt;
+   *   &lt;dd&gt;Sanitizes HTML in the values of the interpolation parameters using $sanitize&lt;/dd&gt;
+   *   &lt;dt&gt;escapeParameters&lt;/dt&gt;
+   *   &lt;dd&gt;Escapes HTML in the values of the interpolation parameters&lt;/dd&gt;
+   *   &lt;dt&gt;escaped&lt;/dt&gt;
+   *   &lt;dd&gt;Support legacy strategy name &#039;escaped&#039; for backwards compatibility (will be removed in 3.0)&lt;/dd&gt;
+   * &lt;/dl&gt;
    *
    */
 
   strategies = {
-    /**
-     * @ngdoc method
-     * @name sanitize
-     * @methodOf pascalprecht.translate.$translateSanitizationProvider~strategies
-     *
-     * @description
-     * Sanitizes HTML in the translation text using $sanitize.
-     *
-     */
     sanitize: function (value, mode) {
       if (mode === &#039;text&#039;) {
         value = htmlSanitizeValue(value);
       }
       return value;
     },
-    /**
-     * Escapes HTML in the translation.
-     */
     escape: function (value, mode) {
       if (mode === &#039;text&#039;) {
         value = htmlEscapeValue(value);
       }
       return value;
     },
-    /**
-     * Sanitizes HTML in the values of the interpolation parameters using $sanitize.
-     */
     sanitizeParameters: function (value, mode) {
       if (mode === &#039;params&#039;) {
         value = mapInterpolationParameters(value, htmlSanitizeValue);
       }
       return value;
     },
-    /**
-     * Escapes HTML in the values of the interpolation parameters.
-     */
     escapeParameters: function (value, mode) {
       if (mode === &#039;params&#039;) {
         value = mapInterpolationParameters(value, htmlEscapeValue);

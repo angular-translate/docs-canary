@@ -119,7 +119,7 @@ NG_DOCS={
       "type": "object",
       "moduleName": "pascalprecht.translate",
       "shortDescription": "Configurations for $translateSanitization",
-      "keywords": "$translatesanitization $translatesanitizationprovider adds addstrategy api array blabla configurations consisting custom executed existing function functions key list multiple names object order pascalprecht property provided removes removestrategy sanitization selects strategies strategy strategyfunction strategyname translate unique usestrategy"
+      "keywords": "$sanitize $translatesanitization $translatesanitizationprovider adds addstrategy api array backwards built-in compatibility configurations consisting custom escaped executed existing function functions html interpolation key legacy list multiple names object order parameters pascalprecht property provided removed removes removestrategy sanitization selects strategies strategy strategyfunction strategyname text translate translation unique usestrategy values"
     },
     {
       "section": "api",
