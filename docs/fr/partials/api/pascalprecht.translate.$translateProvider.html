@@ -44,6 +44,18 @@ only that it says which language to <strong>fallback</strong>.</p>
 </div><h5 id="methods_fallbacklanguage_parameters">Parameters</h5><table class="variables-matrix table table-bordered table-striped"><thead><tr><th>Param</th><th>Type</th><th>Details</th></tr></thead><tbody><tr><td>langKey</td><td><a href="" class="label type-hint type-hint-string">string</a><a href="" class="label type-hint type-hint-object"></a><a href="" class="label type-hint type-hint-array">array</a></td><td><div class="pascalprecht-translate-translateprovider-fallbacklanguage-page"><p>A language key.</p>
 </div></td></tr></tbody></table></div>
 </li>
+<li><a href="https://github.com/angular-translate/angular-translate/blob/9c475d6/src/service/translate.js#L703" class="view-source icon-eye-open"> </a><h3 id="methods_methods_usepostcompiling">methods_usePostCompiling(factory)</h3>
+<div class="methods_usepostcompiling"><div class="pascalprecht-translate-translateprovider-methods-usepostcompiling-page"><p>If post compiling is enabled, all translated values will be processed
+again with AngularJS&#39; $compile.</p>
+<p>Example:
+<pre class="prettyprint linenums">
+ app.config(function ($translateProvider) {
+   $translateProvider.usePostCompiling(true);
+ });
+</pre>
+</div><h5 id="methods_methods_usepostcompiling_parameters">Parameters</h5><table class="variables-matrix table table-bordered table-striped"><thead><tr><th>Param</th><th>Type</th><th>Details</th></tr></thead><tbody><tr><td>factory</td><td><a href="" class="label type-hint type-hint-string">string</a></td><td><div class="pascalprecht-translate-translateprovider-methods-usepostcompiling-page"><p>Factory name</p>
+</div></td></tr></tbody></table></div>
+</li>
 <li><a href="https://github.com/angular-translate/angular-translate/blob/9c475d6/src/service/translate.js#L373" class="view-source icon-eye-open"> </a><h3 id="methods_preferredlanguage">preferredLanguage(langKey)</h3>
 <div class="preferredlanguage"><div class="pascalprecht-translate-translateprovider-preferredlanguage-page"><p>Tells the module which of the registered translation tables to use for translation
 at initial startup by passing a language key. Similar to <code>$translateProvider#use</code>
@@ -224,18 +236,6 @@ and expects a translation id as argument.</p>
 a translation Id which doesn&#39;t exist.</p>
 <p>This is actually a shortcut method for <code>useMissingTranslationHandler()</code>.</p>
 </div></div>
-</li>
-<li><a href="https://github.com/angular-translate/angular-translate/blob/9c475d6/src/service/translate.js#L703" class="view-source icon-eye-open"> </a><h3 id="methods_usepostcompiling">usePostCompiling(factory)</h3>
-<div class="usepostcompiling"><div class="pascalprecht-translate-translateprovider-usepostcompiling-page"><p>If post compiling is enabled, all translated values will be processed
-again with AngularJS&#39; $compile.</p>
-<p>Example:
-<pre class="prettyprint linenums">
- app.config(function ($translateProvider) {
-   $translateProvider.usePostCompiling(true);
- });
-</pre>
-</div><h5 id="methods_usepostcompiling_parameters">Parameters</h5><table class="variables-matrix table table-bordered table-striped"><thead><tr><th>Param</th><th>Type</th><th>Details</th></tr></thead><tbody><tr><td>factory</td><td><a href="" class="label type-hint type-hint-string">string</a></td><td><div class="pascalprecht-translate-translateprovider-usepostcompiling-page"><p>Factory name</p>
-</div></td></tr></tbody></table></div>
 </li>
 <li><a href="https://github.com/angular-translate/angular-translate/blob/9c475d6/src/service/translate.js#L355" class="view-source icon-eye-open"> </a><h3 id="methods_usesanitizestrategy">useSanitizeStrategy(value)</h3>
 <div class="usesanitizestrategy"><div class="pascalprecht-translate-translateprovider-usesanitizestrategy-page"><p>Simply sets a sanitation strategy type.</p>
