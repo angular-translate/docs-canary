@@ -398,15 +398,15 @@ NG_DOCS={
   "html5Mode": false,
   "startPage": "/guide",
   "scripts": [
-    "bootstrap-dropdown.js",
     "messageformat.js",
-    "angular.min.js",
-    "angular-cookies.min.js",
-    "angular-translate.min.js",
-    "angular-translate-interpolation-messageformat.min.js",
-    "angular-translate-storage-cookie.min.js",
-    "angular-translate-storage-local.min.js",
-    "angular-translate-loader-static-files.min.js",
-    "angular-translate-handler-log.min.js"
+    "angular.js",
+    "angular-cookies.js",
+    "angular-translate.js",
+    "angular-translate-interpolation-messageformat.js",
+    "angular-translate-storage-cookie.js",
+    "angular-translate-storage-local.js",
+    "angular-translate-loader-url.js",
+    "angular-translate-loader-static-files.js",
+    "angular-translate-handler-log.js"
   ]
 };
