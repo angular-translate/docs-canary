@@ -392,6 +392,7 @@ NG_DOCS={
   "scripts": [
     "messageformat.js",
     "angular.js",
+    "angular-animate.js",
     "angular-cookies.js",
     "angular-translate.js",
     "angular-translate-interpolation-messageformat.js",
