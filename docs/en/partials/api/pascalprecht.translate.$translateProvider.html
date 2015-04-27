@@ -27,7 +27,7 @@ method.</p>
 <p>The <code>getLocale()</code> returns a language key in the format <code>[lang]_[country]</code> or
 <code>[lang]</code> depending on what the browser provides.</p>
 <p>Use this method at your own risk, since not all browsers return a valid
-locale (see <a href="#/api/pascalprecht.translate.$translateProvider#methods_uniformlanguagetag">pascalprecht.translate.$translateProvider#methods_uniformLanguageTag</a>).</p>
+locale (see <a href="#/api/pascalprecht.translate.$translateProvider#methods_uniformlanguagetag">uniformLanguageTag()</a>).</p>
 </div><h5 id="methods_determinepreferredlanguage_parameters">Parameters</h5><table class="variables-matrix table table-bordered table-striped"><thead><tr><th>Param</th><th>Type</th><th>Details</th></tr></thead><tbody><tr><td>fn <div><em>(optional)</em></div></td><td><a href="" class="label type-hint type-hint-function">Function</a></td><td><div class="pascalprecht-translate-translateprovider-determinepreferredlanguage-page"><p>Function to determine a browser&#39;s locale</p>
 </div></td></tr></tbody></table></div>
 </li>
@@ -124,7 +124,7 @@ related translation table.</p>
 <li><a href="https://github.com/angular-translate/angular-translate/blob/ec57d92/src/service/translate.js#L743" class="view-source icon-eye-open"> </a><h3 id="methods_uniformlanguagetag">uniformLanguageTag(options)</h3>
 <div class="uniformlanguagetag"><div class="pascalprecht-translate-translateprovider-uniformlanguagetag-page"><p>Tells angular-translate which language tag should be used as a result when determining
 the current browser language.</p>
-<p>This setting must be set before invoking determinePreferredLanguage.</p>
+<p>This setting must be set before invoking <a href="#/api/pascalprecht.translate.$translateProvider#methods_determinepreferredlanguage">determinePreferredLanguage()</a>.</p>
 <p>The resolver currently supports:</p>
 <ul>
 <li>default
