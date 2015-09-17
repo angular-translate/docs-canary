@@ -53,9 +53,9 @@
 <div class="well doc-example-live animate-container" ng-embed-app="myApp_not_escaped" ng-set-html="index.html-31" ng-eval-javascript="script.js-30"></div>
 <h4 id="轉義的變數內容_demo_escaped">Escaped</h4>
 <h3 id="轉義的變數內容_source">Source</h3>
-<div source-edit="myApp_escape" source-edit-deps="angular.js script.js" source-edit-html="index.html-33" source-edit-css="" source-edit-js="script.js-32" source-edit-json="" source-edit-unit="" source-edit-scenario=""></div>
+<div source-edit="myApp_escaped" source-edit-deps="angular.js script.js" source-edit-html="index.html-33" source-edit-css="" source-edit-js="script.js-32" source-edit-json="" source-edit-unit="" source-edit-scenario=""></div>
 <div class="tabbable"><div class="tab-pane" title="index.html">
-<pre class="prettyprint linenums" ng-set-text="index.html-33" ng-html-wrap-loaded="myApp_escape angular.js script.js"></pre>
+<pre class="prettyprint linenums" ng-set-text="index.html-33" ng-html-wrap-loaded="myApp_escaped angular.js script.js"></pre>
 <script type="text/ng-template" id="index.html-33">
     
     <div ng-controller="Ctrl">
@@ -72,7 +72,7 @@
         PARAGRAPH: 'Hello {{username}}!',
       };
 
-      var app = angular.module('myApp_escape', ['pascalprecht.translate']);
+      var app = angular.module('myApp_escaped', ['pascalprecht.translate']);
 
       app.config(['$translateProvider', function ($translateProvider) {
         $translateProvider.translations('en', translations);
@@ -87,7 +87,7 @@
     </script>
 </div>
 </div><h3 id="轉義的變數內容_demo">Demo</h3>
-<div class="well doc-example-live animate-container" ng-embed-app="myApp_escape" ng-set-html="index.html-33" ng-eval-javascript="script.js-32"></div>
+<div class="well doc-example-live animate-container" ng-embed-app="myApp_escaped" ng-set-html="index.html-33" ng-eval-javascript="script.js-32"></div>
 <h4 id="轉義的變數內容_demo_escaped">Escaped (parameters only)</h4>
 <h3 id="轉義的變數內容_source">Source</h3>
 <div source-edit="myApp_escape_params" source-edit-deps="angular.js script.js" source-edit-html="index.html-35" source-edit-css="" source-edit-js="script.js-34" source-edit-json="" source-edit-unit="" source-edit-scenario=""></div>
