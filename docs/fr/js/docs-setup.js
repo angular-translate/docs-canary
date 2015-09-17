@@ -379,7 +379,7 @@ NG_DOCS={
       "type": "overview",
       "moduleName": "Sécurité",
       "shortDescription": "Échapper du contenu de variable",
-      "keywords": "$scope $translateprovider active activer allons angular angular-translate angularjs app application appliquons attaques aux ce cela color config contenu controller correctement ctrl de deux disponibles du escaped est fr function garantit globale graves guide headline hello html javascript la le lorsqu lorsque love mani module moment myapp ne ng-controller normale nous null options org overview owasp par paragraph parle pas pascalprecht php pour pourtant preferredlanguage quelle qui restitution salut sera signifie sont standard strat style totalement toutefois translate translate-values translations unicorn usesanitizevaluestrategy utilis utilisation utilisez var variable variante votre vous vuln xss"
+      "keywords": "$scope $translateprovider activer allons angular angular-translate angularjs app application appliquons attaques aux ce cela color config contenu controller correctement ctrl de deux disponibles du en enable escape escaped escaping est function garantit globale graves guide headline hello html javascript la le lorsqu lorsque love mani module moment myapp_escape myapp_not_escaped myapp_sanitize ne ng-controller normale nous null options org overview owasp par paragraph parle pas pascalprecht php pour pourtant preferredlanguage quelle qui restitution sanitize sanitized sera signifie sont standard strat style totalement toutefois translate translate-values translations unicorn usesanitizevaluestrategy utilis utilisation utilisez var variable variante votre vous vuln xss"
     },
     {
       "section": "guide",

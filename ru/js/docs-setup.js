@@ -379,7 +379,7 @@ NG_DOCS={
       "type": "overview",
       "moduleName": "Безопасность",
       "shortDescription": "Экранирование динамического контента",
-      "keywords": "$scope $translateprovider angular angular-translate angularjs app color config controller ctrl enable escaped escaping function guide headline hello html javascript love module myapp myapp2 ng-controller null org overview owasp paragraph pascalprecht php standard style translate translate-values translations unicorn usesanitizevaluestrategy var xss"
+      "keywords": "$scope $translateprovider angular angular-translate angularjs app color config controller ctrl en enable escape escaped escaping function guide headline hello html javascript love module myapp_escape myapp_not_escaped myapp_sanitize ng-controller null org overview owasp paragraph pascalprecht php preferredlanguage sanitize sanitized standard style translate translate-values translations unicorn usesanitizevaluestrategy var xss"
     },
     {
       "section": "guide",

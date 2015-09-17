@@ -379,7 +379,7 @@ NG_DOCS={
       "type": "overview",
       "moduleName": "安全性",
       "shortDescription": "轉義的變數內容",
-      "keywords": "$scope $translateprovider angular angular-translate app color config controller ctrl en enable escaped escaping function guide headline hello html javascript love module myapp ng-controller null org overview owasp paragraph pascalprecht php preferredlanguage standard style translate translate-values translations unicorn usesanitizevaluestrategy var xss"
+      "keywords": "$scope $translateprovider angular angular-translate app color config controller ctrl en enable escape escaped escaping function guide headline hello html javascript love module myapp_escape myapp_not_escaped myapp_sanitize ng-controller null org overview owasp paragraph pascalprecht php preferredlanguage sanitize sanitized standard style translate translate-values translations unicorn usesanitizevaluestrategy var xss"
     },
     {
       "section": "guide",
