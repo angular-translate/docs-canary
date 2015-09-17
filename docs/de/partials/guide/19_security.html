@@ -34,7 +34,7 @@ Version wird dies Standard sein):</p>
 <p>Wir empfehlen dringlich eine sichere Strategie zu aktivieren. Daher zeigen wir
 einen Warnhinweis an, so lange nicht explizit eine Strategie gewählt wurde.</p>
 <h3 id="escapen-dynamischer-werte_anwendungsbeispiele">Anwendungsbeispiele</h3>
-<h4 id="escapen-dynamischer-werte_anwendungsbeispiele_neither-escaped-nor-sanitized">Neither escaped nor sanitized</h4>
+<h4 id="escapen-dynamischer-werte_anwendungsbeispiele_weder-escaping-noch-sanitizing-der-übersetzungen">Weder Escaping noch Sanitizing der Übersetzungen</h4>
 <h3 id="escapen-dynamischer-werte_source">Source</h3>
 <div source-edit="myApp_not_escaped" source-edit-deps="angular.js script.js" source-edit-html="index.html-31" source-edit-css="" source-edit-js="script.js-30" source-edit-json="" source-edit-unit="" source-edit-scenario=""></div>
 <div class="tabbable"><div class="tab-pane" title="index.html">
@@ -70,7 +70,7 @@ einen Warnhinweis an, so lange nicht explizit eine Strategie gewählt wurde.</p>
 </div>
 </div><h3 id="escapen-dynamischer-werte_demo">Demo</h3>
 <div class="well doc-example-live animate-container" ng-embed-app="myApp_not_escaped" ng-set-html="index.html-31" ng-eval-javascript="script.js-30"></div>
-<h4 id="escapen-dynamischer-werte_demo_escaped">Escaped</h4>
+<h4 id="escapen-dynamischer-werte_demo_escaping-der-gesamten-übersetzung">Escaping der gesamten Übersetzung</h4>
 <h3 id="escapen-dynamischer-werte_source">Source</h3>
 <div source-edit="myApp_escaped" source-edit-deps="angular.js script.js" source-edit-html="index.html-33" source-edit-css="" source-edit-js="script.js-32" source-edit-json="" source-edit-unit="" source-edit-scenario=""></div>
 <div class="tabbable"><div class="tab-pane" title="index.html">
@@ -107,7 +107,7 @@ einen Warnhinweis an, so lange nicht explizit eine Strategie gewählt wurde.</p>
 </div>
 </div><h3 id="escapen-dynamischer-werte_demo">Demo</h3>
 <div class="well doc-example-live animate-container" ng-embed-app="myApp_escaped" ng-set-html="index.html-33" ng-eval-javascript="script.js-32"></div>
-<h4 id="escapen-dynamischer-werte_demo_escaped">Escaped (parameters only)</h4>
+<h4 id="escapen-dynamischer-werte_demo_escaping-nur-der-dynamischen-parameter">Escaping nur der dynamischen Parameter</h4>
 <h3 id="escapen-dynamischer-werte_source">Source</h3>
 <div source-edit="myApp_escape_params" source-edit-deps="angular.js script.js" source-edit-html="index.html-35" source-edit-css="" source-edit-js="script.js-34" source-edit-json="" source-edit-unit="" source-edit-scenario=""></div>
 <div class="tabbable"><div class="tab-pane" title="index.html">
@@ -125,7 +125,7 @@ einen Warnhinweis an, so lange nicht explizit eine Strategie gewählt wurde.</p>
 <script type="text/ng-template" id="script.js-34">
       var translations = {
         HEADLINE: 'XSS possible!',
-        PARAGRAPH: '<strong>Hello</strong> {{username}}!',
+        PARAGRAPH: '<span style=\'color:green\'>Hello</span> {{username}}!',
       };
 
       var app = angular.module('myApp_escape_params', ['pascalprecht.translate']);
@@ -144,7 +144,7 @@ einen Warnhinweis an, so lange nicht explizit eine Strategie gewählt wurde.</p>
 </div>
 </div><h3 id="escapen-dynamischer-werte_demo">Demo</h3>
 <div class="well doc-example-live animate-container" ng-embed-app="myApp_escape_params" ng-set-html="index.html-35" ng-eval-javascript="script.js-34"></div>
-<h4 id="escapen-dynamischer-werte_demo_sanitized">Sanitized</h4>
+<h4 id="escapen-dynamischer-werte_demo_sanitizing-der-gesamten-übersetzung">Sanitizing der gesamten Übersetzung</h4>
 <h3 id="escapen-dynamischer-werte_source">Source</h3>
 <div source-edit="myApp_sanitize" source-edit-deps="angular.js script.js" source-edit-html="index.html-37" source-edit-css="" source-edit-js="script.js-36" source-edit-json="" source-edit-unit="" source-edit-scenario=""></div>
 <div class="tabbable"><div class="tab-pane" title="index.html">
