@@ -128,7 +128,7 @@ Hasta el momento, las estrategias de escape son las siguientes:</p>
         $translateProvider.translations('en', translations);
         $translateProvider.preferredLanguage('en');
         // Enable escaping of HTML
-        $translateProvider.useSanitizeValueStrategy('escapeParams');
+        $translateProvider.useSanitizeValueStrategy('escapeParameters');
       }]);
 
       app.controller('Ctrl', ['$scope', function ($scope) {
