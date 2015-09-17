@@ -165,7 +165,7 @@ einen Warnhinweis an, so lange nicht explizit eine Strategie gewählt wurde.</p>
         PARAGRAPH: 'Hello {{username}}!',
       };
 
-      var app = angular.module('myApp_sanitize', ['pascalprecht.translate']);
+      var app = angular.module('myApp_sanitize', ['pascalprecht.translate', 'ngSanitize']);
 
       app.config(['$translateProvider', function ($translateProvider) {
         $translateProvider.translations('en', translations);

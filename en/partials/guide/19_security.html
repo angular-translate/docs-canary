@@ -163,7 +163,7 @@ as long as no strategy has been chosen explicitly.</p>
         PARAGRAPH: 'Hello {{username}}!',
       };
 
-      var app = angular.module('myApp_sanitize', ['pascalprecht.translate']);
+      var app = angular.module('myApp_sanitize', ['pascalprecht.translate', 'ngSanitize']);
 
       app.config(['$translateProvider', function ($translateProvider) {
         $translateProvider.translations('en', translations);
