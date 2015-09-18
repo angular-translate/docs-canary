@@ -4,7 +4,7 @@
 </h1>
 <div><div class="--page"><h2 id="轉義的變數內容">轉義的變數內容</h2>
 <p>說到常規輸出，AngularJS 確保輸出將被正確轉義。 然而，當使用 <code>angular-translate</code> 和可變內容時，結果將不會是正確轉義。
-這意味著你的應用程式很容易受到嚴重的攻擊(參見: <a href="HTTPs://www.owasp.org/index.php/Cross-site_Scripting_(XSS">OWASP</a>))。</p>
+這意味著你的應用程式很容易受到嚴重的攻擊(參見: <a href="https://www.owasp.org/index.php/Cross-site_Scripting_(XSS)">OWASP</a>)。</p>
 <h3 id="轉義的變數內容_一般使用">一般使用</h3>
 <p><code>useSanitizeValueStrategy(strategy)</code> 方法定義哪種轉義策略將被使用，這是全域的。</p>
 <p>目前，有兩個選項可供選擇：<code>null</code>（無）和 <code>escaped</code>（對於HTML）。</p>

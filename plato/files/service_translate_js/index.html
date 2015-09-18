@@ -44,11 +44,11 @@
   <div class="row">
     <div class="col-md-6">
       <h2 class="header">Maintainability <a href="http://blogs.msdn.com/b/codeanalysis/archive/2007/11/20/maintainability-index-range-and-meaning.aspx"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="A value between 0 and 100 that represents the relative ease of maintaining the code. A high value means better maintainability." data-original-title="Maintainability Index"  data-container="body"></i></a></h2>
-      <p class="stat">65.72</p>
+      <p class="stat">65.80</p>
     </div>
     <div class="col-md-6">
       <h2 class="header">Lines of code <i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="Source Lines of Code / Logical Lines of Code" data-original-title="SLOC/LSLOC" data-container="body"></i></h2>
-      <p class="stat">2055</p>
+      <p class="stat">2118</p>
     </div>
   </div>
   <div class="row historical">
@@ -62,11 +62,11 @@
   <div class="row">
     <div class="col-md-6">
       <h2 class="header">Difficulty  <a href="http://en.wikipedia.org/wiki/Halstead_complexity_measures"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="The difficulty measure is related to the difficulty of the program to write or understand." data-original-title="Difficulty" data-container="body"></i></a></h2>
-      <p class="stat">99.38</p>
+      <p class="stat">99.85</p>
     </div>
     <div class="col-md-6">
       <h2 class="header">Estimated Errors  <a href="http://en.wikipedia.org/wiki/Halstead_complexity_measures"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="Halstead's delivered bugs is an estimate for the number of errors in the implementation." data-original-title="Delivered Bugs" data-container="body"></i></a></h2>
-      <p class="stat">10.75</p>
+      <p class="stat">11.15</p>
     </div>
   </div>
 </div>
@@ -128,6 +128,7 @@ function $translate($STORAGE_KEY, $windowProvider, $translateSanitizationProvide
       $postCompilingEnabled = false,
       $forceAsyncReloadEnabled = false,
       $nestedObjectDelimeter = &#039;.&#039;,
+      $isReady = false,
       loaderCache,
       directivePriority = 0,
       statefulFilter = true,
@@ -1258,7 +1259,7 @@ function $translate($STORAGE_KEY, $windowProvider, $translateSanitizationProvide
           abortLoader.resolve();
         }
         abortLoader = $q.defer();
-        
+
         var loaderOptions = angular.extend({}, $loaderOptions, {
           key: key,
           $http: angular.extend({}, {
@@ -2122,12 +2123,72 @@ function $translate($STORAGE_KEY, $windowProvider, $translateSanitizationProvide
         return statefulFilter;
       };
 
+      /**
+       * @ngdoc function
+       * @name pascalprecht.translate.$translate#isReady
+       * @methodOf pascalprecht.translate.$translate
+       *
+       * @description
+       * Returns whether the service is &quot;ready&quot; to translate (i.e. loading 1st language).
+       *
+       * See also {@link pascalprecht.translate.$translate#methods_onReady onReady()}.
+       *
+       * @return {boolean} current value of ready
+       */
+      $translate.isReady = function () {
+        return $isReady;
+      };
+
+      var $onReadyDeferred = $q.defer();
+
+      /**
+       * @ngdoc function
+       * @name pascalprecht.translate.$translate#onReady
+       * @methodOf pascalprecht.translate.$translate
+       *
+       * @description
+       * Returns whether the service is &quot;ready&quot; to translate (i.e. loading 1st language).
+       *
+       * See also {@link pascalprecht.translate.$translate#methods_isReady isReady()}.
+       *
+       * @param {Function=} fn Function to invoke when service is ready
+       * @return {object} Promise resolved when service is ready
+       */
+      $translate.onReady = function (fn) {
+        var deferred = $q.defer();
+        if (angular.isFunction(fn)) {
+          deferred.promise.then(fn);
+        }
+        if ($isReady) {
+          deferred.resolve();
+        } else {
+          $onReadyDeferred.promise.then(function () {
+            deferred.resolve();
+          });
+        }
+        return deferred.promise;
+      };
+
+      // Whenever $translateReady is being fired, this will ensure the state of $isReady
+      var globalOnReadyListener = $rootScope.$on(&#039;$translateReady&#039;, function () {
+        $onReadyDeferred.resolve();
+        globalOnReadyListener(); // one time only
+        globalOnReadyListener = null;
+      });
+      var globalOnChangeListener = $rootScope.$on(&#039;$translateChangeEnd&#039;, function () {
+        $onReadyDeferred.resolve();
+        globalOnChangeListener(); // one time only
+        globalOnChangeListener = null;
+      });
+
       if ($loaderFactory) {
 
         // If at least one async loader is defined and there are no
         // (default) translations available we should try to load them.
         if (angular.equals($translationTable, {})) {
-          $translate.use($translate.use());
+          if ($translate.use()) {
+            $translate.use($translate.use());
+          }
         }
 
         // Also, if there are any fallback language registered, we start
@@ -2145,6 +2206,8 @@ function $translate($STORAGE_KEY, $windowProvider, $translateSanitizationProvide
             }
           }
         }
+      } else {
+        $rootScope.$emit(&#039;$translateReady&#039;, { language: $translate.use() });
       }
 
       return $translate;
