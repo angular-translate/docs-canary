@@ -44,11 +44,11 @@
   <div class="row">
     <div class="col-md-6">
       <h2 class="header">Maintainability <a href="http://blogs.msdn.com/b/codeanalysis/archive/2007/11/20/maintainability-index-range-and-meaning.aspx"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="A value between 0 and 100 that represents the relative ease of maintaining the code. A high value means better maintainability." data-original-title="Maintainability Index"  data-container="body"></i></a></h2>
-      <p class="stat">66.89</p>
+      <p class="stat">66.54</p>
     </div>
     <div class="col-md-6">
       <h2 class="header">Lines of code <i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="Source Lines of Code / Logical Lines of Code" data-original-title="SLOC/LSLOC" data-container="body"></i></h2>
-      <p class="stat">343</p>
+      <p class="stat">356</p>
     </div>
   </div>
   <div class="row historical">
@@ -62,11 +62,11 @@
   <div class="row">
     <div class="col-md-6">
       <h2 class="header">Difficulty  <a href="http://en.wikipedia.org/wiki/Halstead_complexity_measures"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="The difficulty measure is related to the difficulty of the program to write or understand." data-original-title="Difficulty" data-container="body"></i></a></h2>
-      <p class="stat">36.14</p>
+      <p class="stat">38.21</p>
     </div>
     <div class="col-md-6">
       <h2 class="header">Estimated Errors  <a href="http://en.wikipedia.org/wiki/Halstead_complexity_measures"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="Halstead's delivered bugs is an estimate for the number of errors in the implementation." data-original-title="Delivered Bugs" data-container="body"></i></a></h2>
-      <p class="stat">2.23</p>
+      <p class="stat">2.28</p>
     </div>
   </div>
 </div>
@@ -93,14 +93,15 @@
 /**
  * @ngdoc directive
  * @name pascalprecht.translate.directive:translate
- * @requires $compile
- * @requires $filter
- * @requires $interpolate
- * @restrict A
+ * @requires $interpolate, 
+ * @requires $compile, 
+ * @requires $parse, 
+ * @requires $rootScope
+ * @restrict AE
  *
  * @description
  * Translates given translation id either through attribute or DOM content.
- * Internally it uses `translate` filter to translate translation id. It possible to
+ * Internally it uses $translate service to translate the translation id. It possible to
  * pass an optional `translate-values` object literal as string into translation id.
  *
  * @param {string=} translate Translation id which could be either string or interpolated string.
@@ -108,6 +109,7 @@
  * @param {string=} translate-attr-ATTR translate Translation id and put it into ATTR attribute.
  * @param {string=} translate-default will be used unless translation was successful
  * @param {boolean=} translate-compile (default true if present) defines locally activation of {@link pascalprecht.translate.$translateProvider#methods_usePostCompiling}
+ * @param {boolean=} translate-keep-content (default true if present) defines that in case a KEY could not be translated, that the existing content is left in the innerHTML}
  *
  * @example
    &lt;example module=&quot;ngView&quot;&gt;
@@ -124,6 +126,7 @@
         &lt;pre translate=&quot;WITH_VALUES&quot; translate-values=&quot;{{values}}&quot;&gt;&lt;/pre&gt;
         &lt;pre translate translate-values=&quot;{{values}}&quot;&gt;WITH_VALUES&lt;/pre&gt;
         &lt;pre translate translate-attr-title=&quot;WITH_VALUES&quot; translate-values=&quot;{{values}}&quot;&gt;&lt;/pre&gt;
+        &lt;pre translate=&quot;WITH_CAMEL_CASE_KEY&quot; translate-value-camel-case-key=&quot;Hi&quot;&gt;&lt;/pre&gt;
 
       &lt;/div&gt;
     &lt;/file&gt;
@@ -134,7 +137,8 @@
 
         $translateProvider.translations(&#039;en&#039;,{
           &#039;TRANSLATION_ID&#039;: &#039;Hello there!&#039;,
-          &#039;WITH_VALUES&#039;: &#039;The following value is dynamic: {{value}}&#039;
+          &#039;WITH_VALUES&#039;: &#039;The following value is dynamic: {{value}}&#039;,
+          &#039;WITH_CAMEL_CASE_KEY&#039;: &#039;The interpolation key is camel cased: {{camelCaseKey}}&#039;
         }).preferredLanguage(&#039;en&#039;);
 
       });
@@ -171,13 +175,17 @@
           element = $compile(&#039;&lt;p translate translate-attr-title=&quot;TRANSLATION_ID&quot;&gt;&lt;/p&gt;&#039;)($rootScope);
           $rootScope.$digest();
           expect(element.attr(&#039;title&#039;)).toBe(&#039;Hello there!&#039;);
+
+          element = $compile(&#039;&lt;p translate=&quot;WITH_CAMEL_CASE_KEY&quot; translate-value-camel-case-key=&quot;Hello&quot;&gt;&lt;/p&gt;&#039;)($rootScope);
+          $rootScope.$digest();
+          expect(element.text()).toBe(&#039;The interpolation key is camel cased: Hello&#039;);
         });
       });
     &lt;/file&gt;
    &lt;/example&gt;
  */
 .directive(&#039;translate&#039;, translateDirective);
-function translateDirective($translate, $q, $interpolate, $compile, $parse, $rootScope) {
+function translateDirective($translate, $interpolate, $compile, $parse, $rootScope) {
 
   &#039;use strict&#039;;
 
@@ -264,7 +272,8 @@ function translateDirective($translate, $q, $interpolate, $compile, $parse, $roo
                 });
               }
             } else {
-              translationIds.translate = iElementText;
+              // do not assigne the translation id if it is empty.
+              translationIds.translate = !iElementText ? undefined : iElementText;
             }
           } else {
             translationIds.translate = translationId;
@@ -298,13 +307,14 @@ function translateDirective($translate, $q, $interpolate, $compile, $parse, $roo
         });
 
         for (var translateAttr in iAttr) {
-          if (iAttr.hasOwnProperty(translateAttr) &amp;&amp; translateAttr.substr(0, 13) === &#039;translateAttr&#039;) {
+          if (iAttr.hasOwnProperty(translateAttr) &amp;&amp; translateAttr.substr(0, 13) === &#039;translateAttr&#039; &amp;&amp; translateAttr.length &gt; 13) {
             observeAttributeTranslation(translateAttr);
           }
         }
 
         iAttr.$observe(&#039;translateDefault&#039;, function (value) {
           scope.defaultText = value;
+          updateTranslations();
         });
 
         if (translateValuesExist) {
@@ -334,7 +344,6 @@ function translateDirective($translate, $q, $interpolate, $compile, $parse, $roo
         // Master update function
         var updateTranslations = function () {
           for (var key in translationIds) {
-
             if (translationIds.hasOwnProperty(key) &amp;&amp; translationIds[key] !== undefined) {
               updateTranslation(key, translationIds[key], scope, scope.interpolateParams, scope.defaultText, scope.translateNamespace);
             }
@@ -349,7 +358,7 @@ function translateDirective($translate, $q, $interpolate, $compile, $parse, $roo
               translationId = translateNamespace + translationId;
             }
 
-            $translate(translationId, interpolateParams, translateInterpolation, defaultTranslationText)
+            $translate(translationId, interpolateParams, translateInterpolation, defaultTranslationText, scope.translateLanguage)
               .then(function (translation) {
                 applyTranslation(translation, scope, true, translateAttr);
               }, function (translationId) {
@@ -362,12 +371,16 @@ function translateDirective($translate, $q, $interpolate, $compile, $parse, $roo
         };
 
         var applyTranslation = function (value, scope, successful, translateAttr) {
-          if (translateAttr === &#039;translate&#039;) {
-            // default translate into innerHTML
-            if (!successful &amp;&amp; typeof scope.defaultText !== &#039;undefined&#039;) {
+          if (!successful) {
+            if (typeof scope.defaultText !== &#039;undefined&#039;) {
               value = scope.defaultText;
             }
-            iElement.empty().append(scope.preText + value + scope.postText);
+          }
+          if (translateAttr === &#039;translate&#039;) {
+            // default translate into innerHTML
+            if (successful || (!successful &amp;&amp; !$translate.isKeepContent() &amp;&amp; typeof iAttr.translateKeepContent === &#039;undefined&#039;)) {
+              iElement.empty().append(scope.preText + value + scope.postText);
+            }
             var globallyEnabled = $translate.isPostCompilingEnabled();
             var locallyDefined = typeof tAttr.translateCompile !== &#039;undefined&#039;;
             var locallyEnabled = locallyDefined &amp;&amp; tAttr.translateCompile !== &#039;false&#039;;
@@ -376,9 +389,6 @@ function translateDirective($translate, $q, $interpolate, $compile, $parse, $roo
             }
           } else {
             // translate attribute
-            if (!successful &amp;&amp; typeof scope.defaultText !== &#039;undefined&#039;) {
-              value = scope.defaultText;
-            }
             var attributeName = iAttr.$attr[translateAttr];
             if (attributeName.substr(0, 5) === &#039;data-&#039;) {
               // ensure html5 data prefix is stripped
@@ -392,6 +402,9 @@ function translateDirective($translate, $q, $interpolate, $compile, $parse, $roo
         if (translateValuesExist || translateValueExist || iAttr.translateDefault) {
           scope.$watch(&#039;interpolateParams&#039;, updateTranslations, true);
         }
+
+        // Replaced watcher on translateLanguage with event listener
+        scope.$on(&#039;translateLanguageChanged&#039;, updateTranslations);
 
         // Ensures the text will be refreshed after the current language was changed
         // w/ $translate.use(...)
@@ -443,10 +456,10 @@ translateDirective.displayName = &#039;translateDirective&#039;;</textarea>
 
 <script type="text/html" id="complexity-popover-template">
   <div class="complexity-notice">
-    Complexity : {{ complexity.cyclomatic }} <br>
-    Length : {{ complexity.halstead.length }} <br>
-    Difficulty : {{ complexity.halstead.difficulty.toFixed(2) }} <br>
-    Est # bugs : {{ complexity.halstead.bugs.toFixed(2) }}<br>
+    Complexity : {{ cyclomatic }} <br>
+    Length : {{ halstead.length }} <br>
+    Difficulty : {{ halstead.difficulty.toFixed(2) }} <br>
+    Est # bugs : {{ halstead.bugs.toFixed(2) }}<br>
   </div>
 </script>
 
